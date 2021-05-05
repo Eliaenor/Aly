@@ -54,6 +54,9 @@ class Controller
                 case 'comment' :
                     $this->createComment($url);
                     break;
+                case 'contactme' :
+                    $this->sendContactMe($url);
+                    break;
                 default:
                     $this->notFound();
                     break;
@@ -121,6 +124,16 @@ class Controller
         }
 
         header("Location: ".$this->rewritebase."postView\\".$url[3]);
+        exit();
+    }
+
+    protected function sendContactMe($url)
+    {
+        $baseMessage = "Message de ".$_POST['name']." (".$_POST['email'].")\n\n";
+        var_dump('dmsgaelle@gmail.com','[BLOG] CONTACT - '.$_POST['subject'], $baseMessage.$_POST['message']);
+        // mail('dmsgaelle@gmail.com','[BLOG] CONTACT - '.$_POST['subject'], $baseMessage.$_POST['message']);
+
+        header("Location: ".$this->rewritebase);
         exit();
     }
 
